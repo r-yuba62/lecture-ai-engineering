@@ -49,7 +49,7 @@ pipe = llm.load_model()
 # --- Streamlit アプリケーション ---
 file_path = "./ずんだもん立ち絵素材2.3.png"
 img = Image.open(file_path)
-st.image(img)
+st.image(img, width=100)
 st.title("ずんだもんチャットボット")
 st.write("Gemmaモデルを使用したチャットボットです。回答に対してフィードバックを行えます。")
 st.markdown("---")
