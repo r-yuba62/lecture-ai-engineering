@@ -6,6 +6,7 @@ import database             # データベースモジュール
 import metrics              # 評価指標モジュール
 import data                 # データモジュール
 import torch
+torch.classes.__path__ = []
 from transformers import pipeline
 from config import MODEL_NAME
 from huggingface_hub import HfFolder
