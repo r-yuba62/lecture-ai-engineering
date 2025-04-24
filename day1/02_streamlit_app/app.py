@@ -6,9 +6,11 @@ import database             # データベースモジュール
 import metrics              # 評価指標モジュール
 import data                 # データモジュール
 import torch
+torch.classes.__path__ = []
 from transformers import pipeline
 from config import MODEL_NAME
 from huggingface_hub import HfFolder
+from PIL import Image
 
 # --- アプリケーション設定 ---
 st.set_page_config(page_title="Gemma Chatbot", layout="wide")
@@ -46,9 +48,33 @@ def load_model():
 pipe = llm.load_model()
 
 # --- Streamlit アプリケーション ---
-st.title("🤖 Gemma 2 Chatbot with Feedback")
+file_path = "./ずんだもん立ち絵素材2.3.png"
+img = Image.open(file_path)
+st.image(img, width=100)
+st.title("ずんだもんチャットボット")
 st.write("Gemmaモデルを使用したチャットボットです。回答に対してフィードバックを行えます。")
 st.markdown("---")
+
+# ---　イメージカラー ---
+st.markdown(
+    """
+    <style>
+    .zundamon-text {
+        color: #004a55;
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .zundamon-bg {
+        background-color: #004a55;
+        color: white;
+        padding: 1em;
+        border-radius: 8px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # --- サイドバー ---
 st.sidebar.title("ナビゲーション")
@@ -78,4 +104,4 @@ elif st.session_state.page == "サンプルデータ管理":
 
 # --- フッターなど（任意） ---
 st.sidebar.markdown("---")
-st.sidebar.info("開発者: [Your Name]")
+st.sidebar.info("開発者: r-yuba62\n提供元： 松尾研究室AIエンジニアリング実践講座")

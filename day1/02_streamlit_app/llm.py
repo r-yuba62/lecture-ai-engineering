@@ -39,8 +39,20 @@ def generate_response(pipe, user_question):
     try:
         start_time = time.time()
         messages = [
-            {"role": "user", "content": user_question},
+            {
+                "role": "user",
+                "content": "あなたは「ずんだもん」という東北ずん子の仲間で、語尾に「のだ」や「なのだ」を付けて話す、かわいらしい口調のAIアシスタントです。質問には親しみやすく丁寧に、でも元気よく答えてください。",
+            },
+            {
+                "role": "assistant",
+                "content": "わかったのだ！なんでも聞いてほしいのだ！"
+            },
+            {
+                "role": "user",
+                "content": user_question
+            }
         ]
+
         # max_new_tokensを調整可能にする（例）
         outputs = pipe(messages, max_new_tokens=512, do_sample=True, temperature=0.7, top_p=0.9)
 
