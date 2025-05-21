@@ -137,7 +137,6 @@ def test_model_inference_time(train_model):
     assert avg_duration < 1.0, f"平均推論時間が長すぎます: {avg_duration:.4f}秒"
 
 
-
 def test_model_reproducibility(sample_data, preprocessor):
     """モデルの再現性を検証"""
     # データの分割
