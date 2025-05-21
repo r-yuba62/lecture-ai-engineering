@@ -125,15 +125,17 @@ def test_model_inference_time(train_model):
     """モデルの推論時間を検証"""
     model, X_test, _ = train_model
 
-    # 推論時間の計測
-    start_time = time.time()
-    model.predict(X_test)
-    end_time = time.time()
+    n_runs = 5
+    durations = []
 
-    inference_time = end_time - start_time
+    for _ in range(n_runs):
+        start_time = time.time()
+        model.predict(X_test)
+        durations.append(time.time() - start_time)
 
-    # 推論時間が1秒未満であることを確認
-    assert inference_time < 1.0, f"推論時間が長すぎます: {inference_time}秒"
+    avg_duration = np.mean(durations)
+    assert avg_duration < 1.0, f"平均推論時間が長すぎます: {avg_duration:.4f}秒"
+
 
 
 def test_model_reproducibility(sample_data, preprocessor):
